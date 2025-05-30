@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { PlusCircle, PenLine } from "lucide-react";
 
 interface NoteFormProps {
@@ -13,7 +13,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onAddNote }) => {
   const [error, setError] = useState("");
 
   // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Basic validation
@@ -38,6 +38,14 @@ const NoteForm: React.FC<NoteFormProps> = ({ onAddNote }) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
   };
 
   return (
@@ -65,7 +73,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onAddNote }) => {
             type="text"
             id="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameChange}
             className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-blue-300"
             placeholder="Enter a catchy title..."
             disabled={isSubmitting}
@@ -82,7 +90,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onAddNote }) => {
           <textarea
             id="content"
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={handleContentChange}
             className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-blue-300 min-h-[150px] resize-y"
             placeholder="Write your thoughts here..."
             disabled={isSubmitting}
