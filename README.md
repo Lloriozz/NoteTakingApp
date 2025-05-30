@@ -1,6 +1,6 @@
-# NoteKeeper App
+# NoteTakingApp
 
-A beginner-friendly note-taking application with a React frontend and Python Flask backend.
+A beginner-friendly note-taking application with a React frontend and Express backend.
 
 ## Features
 
@@ -15,14 +15,16 @@ A beginner-friendly note-taking application with a React frontend and Python Fla
 ### Frontend (React)
 
 The frontend is built with React and uses:
+
 - React functional components
 - Basic hooks (useState, useEffect)
 - Tailwind CSS for styling
 - Lucide React for icons
 
-### Backend (Python Flask)
+### Backend (Express)
 
-The backend is built with Python Flask and:
+The backend is built with Express and TypeScript:
+
 - Stores notes in a JSON file
 - Implements manual search and sort algorithms
 - Provides REST API endpoints for note operations
@@ -31,28 +33,31 @@ The backend is built with Python Flask and:
 
 ### Running the Backend
 
-1. Navigate to the backend directory:
+1. Navigate to the server directory:
+
    ```
-   cd backend
+   cd server
    ```
 
 2. Install dependencies:
+
    ```
-   pip install -r requirements.txt
+   npm install
    ```
 
-3. Run the Flask server:
+3. Run the server:
    ```
-   python app.py
+   npm run dev
    ```
 
-The server will start on http://localhost:5000
+The server will start on http://localhost:3001
 
 ### Running the Frontend
 
 1. In a new terminal, navigate to the project root directory
 
 2. Install dependencies:
+
    ```
    npm install
    ```
@@ -71,12 +76,14 @@ The frontend will be available at http://localhost:5173
 - `GET /notes/search?name=query` - Search notes by name
 - `GET /notes/search?content=query` - Search notes by content
 - `GET /notes/sort?key=name&order=asc` - Sort notes by name or date
+- `DELETE /notes/:id` - Delete a note
 
 ## Project Implementation Details
 
 ### Manual Algorithms
 
 This project manually implements:
+
 - Case-insensitive string comparison for name search
 - Substring search for content search
 - Bubble sort for sorting notes
