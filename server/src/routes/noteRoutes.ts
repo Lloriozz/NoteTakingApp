@@ -1,22 +1,43 @@
 import { Router } from 'express';
 import { NoteController } from '../controllers/noteController';
 
+// Create a router object from Express
 const router = Router();
+
+// Create a controller to handle the logic for each route
 const noteController = new NoteController();
 
-// Lấy tất cả ghi chú
+// ----------------------------
+// Route to get all notes
+// Example: GET /notes
+// ----------------------------
 router.get('/notes', noteController.getAllNotes);
 
-// Tạo ghi chú mới
+// ----------------------------
+// Route to create a new note
+// Example: POST /notes
+// Body: { "name": "Note title", "content": "Note content" }
+// ----------------------------
 router.post('/notes', noteController.createNote);
 
-// Tìm kiếm ghi chú
+// ----------------------------
+// Route to search notes by name or content
+// Example: GET /notes/search?name=hello
+//          GET /notes/search?content=world
+// ----------------------------
 router.get('/notes/search', noteController.searchNotes);
 
-// Sắp xếp ghi chú
+// ----------------------------
+// Route to sort notes by name or date
+// Example: GET /notes/sort?key=name&order=asc
+// ----------------------------
 router.get('/notes/sort', noteController.sortNotes);
 
-// Xóa ghi chú
+// ----------------------------
+// Route to delete a note by its ID
+// Example: DELETE /notes/12345
+// ----------------------------
 router.delete('/notes/:id', noteController.deleteNote);
 
-export default router; 
+// Export the router to use in the main app (index.ts)
+export default router;

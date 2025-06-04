@@ -141,8 +141,16 @@ function App() {
       const response = await fetch(`${API_URL}/notes/${id}`, {
         method: "DELETE",
       });
-      await handleResponse<ApiResponse<void>>(response);
-      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+      const result = await handleResponse<ApiResponse<void>>(response);
+
+      if (result.success) {
+        setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+        setError(null); // Clear any existing errors
+      } else {
+        setError(
+          result.error || "Failed to delete note. Please try again later."
+        );
+      }
     } catch (err) {
       setError("Failed to delete note. Please try again later.");
       console.error("Error deleting note:", err);

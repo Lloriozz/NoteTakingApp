@@ -16,7 +16,6 @@ export interface SearchParams {
   content?: string;
 }
 
-
 export interface SortParams {
   key: 'name' | 'date';
   order: 'asc' | 'desc';
